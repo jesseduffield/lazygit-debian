@@ -1,0 +1,77 @@
+digraph "lazygit-dependencies" {
+    // Define Nodes
+    comment1              [ shape=none,     label="<Node colours>\norange: circular dependencies" ];
+    comment2              [ shape=none,     label="<Node shapes>\nellipse: library\nbox: contains executable" ];
+    bom                   [ shape=ellipse,  label="github.com/spkg/bom" ];
+    collections           [ shape=ellipse,  label="github.com/badgerodon/collections" ];
+    fswatch               [ shape=box,      label="github.com/gokyle/fswatch" ];
+    gcfg                  [ shape=ellipse,  label="github.com/src-d/gcfg" ];
+    goa                   [ shape=ellipse,  label="github.com/mgutz/goa",                 style=filled, fillcolor=orange ];
+    "go-billy.v4"         [ shape=ellipse,  label="gopkg.in/src-d/go-billy.v4" ];
+    "go-context"          [ shape=ellipse,  label="github.com/jbenet/go-context" ];
+    gocui                 [ shape=ellipse,  label="github.com/jesseduffield/gocui" ];
+    "godo.v1"             [ shape=ellipse,  label="gopkg.in/godo.v1",                     style=filled, fillcolor=orange ];
+    "godo.v2"             [ shape=box,      label="gopkg.in/godo.v2"                      style=filled, fillcolor=orange ];
+    gods                  [ shape=ellipse,  label="github.com/emirpasic/gods" ];
+    "go-getter"           [ shape=box,      label="github.com/jesseduffield/go-getter" ];
+    "go-git-fixtures.v3"  [ shape=ellipse,  label="gopkg.in/src-d/go-git-fixtures.v3",    style=filled, fillcolor=orange ];
+    "go-git.v4"           [ shape=box,      label="gopkg.in/src-d/go-git.v4",             style=filled, fillcolor=orange ];
+    "go-safetemp"         [ shape=ellipse,  label="github.com/hashicorp/go-safetemp" ];
+    "go-shlex"            [ shape=ellipse,  label="github.com/anmitsu/go-shlex" ];
+    "jibber_jabber"       [ shape=ellipse,  label="github.com/cloudfoundry/jibber_jabber" ];
+    lazygit               [ shape=box,      label="github.com/jesseduffield/lazygit" ];
+    minimist              [ shape=ellipse,  label="github.com/mgutz/minimist" ];
+    pty                   [ shape=ellipse,  label="github.com/jesseduffield/pty" ];
+    rollrus               [ shape=ellipse,  label="github.com/heroku/rollrus" ];
+    roll                  [ shape=ellipse,  label="github.com/stvp/roll" ];
+    "ssh_config"          [ shape=ellipse,  label="github.com/kevinburke/ssh_config" ];
+    ssh                   [ shape=ellipse,  label="github.com/gliderlabs/ssh" ];
+    str                   [ shape=box,      label="github.com/mgutz/str",                 style=filled, fillcolor=orange ];
+    "termbox-go"          [ shape=ellipse,  label="github.com/jesseduffield/termbox-go" ];
+    tgz                   [ shape=ellipse,  label="github.com/alcortesm/tgz" ];
+    throttler             [ shape=ellipse,  label="github.com/nozzle/throttler" ];
+    to                    [ shape=ellipse,  label="github.com/mgutz/to" ];
+    walk                  [ shape=ellipse,  label="github.com/MichaelTJones/walk" ];
+
+    // Define Graph
+    lazygit;
+    lazygit -> "jibber_jabber";
+    lazygit -> collections;
+    lazygit -> rollrus;
+        rollrus -> roll;
+    lazygit -> pty;
+    lazygit -> "go-getter";
+        "go-getter" -> "go-safetemp";
+    lazygit -> gocui;
+    lazygit -> "termbox-go";
+    lazygit -> str;
+        str -> goa;
+            goa -> "godo.v1";
+                "godo.v1" -> goa;
+                "godo.v1" -> minimist;
+                    minimist -> to;
+                "godo.v1" -> fswatch;
+                "godo.v1" -> walk;
+                "godo.v1" -> str;
+            goa -> str;
+        str -> "godo.v2";
+            "godo.v2" -> fswatch;
+            "godo.v2" -> minimist;
+            //   minimist -> to; // already defined above
+            "godo.v2" -> throttler;
+            "godo.v2" -> walk;
+            "godo.v2" -> str;
+    lazygit -> bom;
+    lazygit -> "go-git.v4";
+        "go-git.v4" -> ssh;
+            ssh -> "go-shlex";
+        "go-git.v4" -> "go-git-fixtures.v3";
+            "go-git-fixtures.v3" -> tgz;
+            "go-git-fixtures.v3" -> "go-billy.v4";
+            "go-git-fixtures.v3" -> "go-git.v4";
+        "go-git.v4" -> gcfg;
+        "go-git.v4" -> gods;
+        "go-git.v4" -> "ssh_config";
+        "go-git.v4" -> "go-billy.v4";
+        "go-git.v4" -> "go-context";
+}
