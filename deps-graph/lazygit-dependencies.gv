@@ -10,20 +10,16 @@ digraph "lazygit-dependencies" {
     gocui                 [ shape=ellipse,  label="github.com/jesseduffield/gocui" ];
     gods                  [ shape=ellipse,  label="github.com/emirpasic/gods" ];
     "go-getter"           [ shape=box,      label="github.com/jesseduffield/go-getter" ];
-    "go-git-fixtures.v3"  [ shape=ellipse,  label="gopkg.in/src-d/go-git-fixtures.v3",    style=filled, fillcolor=orange ];
-    "go-git.v4"           [ shape=box,      label="gopkg.in/src-d/go-git.v4",             style=filled, fillcolor=orange ];
+    "go-git.v4"           [ shape=box,      label="gopkg.in/src-d/go-git.v4" ];
     "go-safetemp"         [ shape=ellipse,  label="github.com/hashicorp/go-safetemp" ];
-    "go-shlex"            [ shape=ellipse,  label="github.com/anmitsu/go-shlex" ];
     "jibber_jabber"       [ shape=ellipse,  label="github.com/cloudfoundry/jibber_jabber" ];
     lazygit               [ shape=box,      label="github.com/jesseduffield/lazygit" ];
     pty                   [ shape=ellipse,  label="github.com/jesseduffield/pty" ];
     rollrus               [ shape=ellipse,  label="github.com/heroku/rollrus" ];
     roll                  [ shape=ellipse,  label="github.com/stvp/roll" ];
     "ssh_config"          [ shape=ellipse,  label="github.com/kevinburke/ssh_config" ];
-    ssh                   [ shape=ellipse,  label="github.com/gliderlabs/ssh" ];
     str                   [ shape=box,      label="github.com/mgutz/str" ];
     "termbox-go"          [ shape=ellipse,  label="github.com/jesseduffield/termbox-go" ];
-    tgz                   [ shape=ellipse,  label="github.com/alcortesm/tgz" ];
 
     // Define Graph
     lazygit;
@@ -39,12 +35,6 @@ digraph "lazygit-dependencies" {
     lazygit -> str;
     lazygit -> bom;
     lazygit -> "go-git.v4";
-        "go-git.v4" -> ssh;
-            ssh -> "go-shlex";
-        "go-git.v4" -> "go-git-fixtures.v3";
-            "go-git-fixtures.v3" -> tgz;
-            "go-git-fixtures.v3" -> "go-billy.v4";
-            "go-git-fixtures.v3" -> "go-git.v4";
         "go-git.v4" -> gcfg;
         "go-git.v4" -> gods;
         "go-git.v4" -> "ssh_config";
