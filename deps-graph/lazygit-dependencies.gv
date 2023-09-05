@@ -1,43 +1,113 @@
-digraph "lazygit-dependencies" {
-    // Define Nodes
-    comment1              [ shape=none,     label="<Node colours>\norange: circular dependencies" ];
-    comment2              [ shape=none,     label="<Node shapes>\nellipse: library\nbox: contains executable" ];
-    bom                   [ shape=ellipse,  label="github.com/spkg/bom" ];
-    collections           [ shape=ellipse,  label="github.com/badgerodon/collections" ];
-    gcfg                  [ shape=ellipse,  label="github.com/src-d/gcfg" ];
-    "go-billy.v4"         [ shape=ellipse,  label="gopkg.in/src-d/go-billy.v4" ];
-    "go-context"          [ shape=ellipse,  label="github.com/jbenet/go-context" ];
-    gocui                 [ shape=ellipse,  label="github.com/jesseduffield/gocui" ];
-    gods                  [ shape=ellipse,  label="github.com/emirpasic/gods" ];
-    "go-getter"           [ shape=box,      label="github.com/jesseduffield/go-getter" ];
-    "go-git.v4"           [ shape=box,      label="gopkg.in/src-d/go-git.v4" ];
-    "go-safetemp"         [ shape=ellipse,  label="github.com/hashicorp/go-safetemp" ];
-    "jibber_jabber"       [ shape=ellipse,  label="github.com/cloudfoundry/jibber_jabber" ];
-    lazygit               [ shape=box,      label="github.com/jesseduffield/lazygit" ];
-    pty                   [ shape=ellipse,  label="github.com/jesseduffield/pty" ];
-    rollrus               [ shape=ellipse,  label="github.com/heroku/rollrus" ];
-    roll                  [ shape=ellipse,  label="github.com/stvp/roll" ];
-    "ssh_config"          [ shape=ellipse,  label="github.com/kevinburke/ssh_config" ];
-    str                   [ shape=box,      label="github.com/mgutz/str" ];
-    "termbox-go"          [ shape=ellipse,  label="github.com/jesseduffield/termbox-go" ];
+digraph lazygit {
+    // Define Size
+    ratio="fill";
+    size="180,30!";
+    margin=0;
 
+    // Define Node - Not Packaged
+    "github.com/aybabtme/humanlog"                  [ fillcolor=white, style=filled ];
+    "github.com/fsmiamoto/git-todo-parser"          [ fillcolor=white, style=filled ];
+    "github.com/gookit/color"                       [ fillcolor=white, style=filled ];
+    "github.com/jesseduffield/generics"             [ fillcolor=white, style=filled ];
+    "github.com/jesseduffield/go-git/v5"            [ fillcolor=white, style=filled ];
+    "github.com/jesseduffield/lazycore"             [ fillcolor=white, style=filled ];
+    "github.com/OpenPeeDeeP/xdg"                    [ fillcolor=white, style=filled ];
+    "github.com/samber/lo"                          [ fillcolor=white, style=filled ];
+    "github.com/stefanhaller/tcell.v2"              [ fillcolor=white, style=filled ];
+    "gopkg.in/ozeidan/fuzzy-patricia.v3"            [ fillcolor=white, style=filled ];
+
+    // Define Node - Done Packaged
+    "golang-github-attotto-clipboard-dev"           [ fillcolor=green, style=filled ];
+    "golang-github-cloudfoundry-jibber-jabber-dev"  [ fillcolor=green, style=filled ];
+    "golang-github-com-creack-pty-dev"              [ fillcolor=green, style=filled ];
+    "golang-github-davecgh-go-spew-dev"             [ fillcolor=green, style=filled ];
+    "golang-github-go-errors-errors-dev"            [ fillcolor=green, style=filled ];
+    "golang-github-imdario-mergo-dev"               [ fillcolor=green, style=filled ];
+    "golang-github-intergrii-flaggy-dev"            [ fillcolor=green, style=filled ];
+    "golang-github-jesseduffield-gocui-dev"         [ fillcolor=green, style=filled ];
+    "golang-github-kardianos-osext-dev"             [ fillcolor=green, style=filled ];
+    "golang-github-kr-text-dev"                     [ fillcolor=green, style=filled ];
+    "golang-github-kyokomi-emoji-dev"               [ fillcolor=green, style=filled ];
+    "golang-github-lucasb-eyer-go-colorful-dev"     [ fillcolor=green, style=filled ];
+    "golang-github-mattn-go-runewidth-dev"          [ fillcolor=green, style=filled ];
+    "golang-github-mgutz-str-dev"                   [ fillcolor=green, style=filled ];
+    "golang-github-pmezard-go-difflib-dev"          [ fillcolor=green, style=filled ];
+    "golang-github-sahilm-fuzzy-dev"                [ fillcolor=green, style=filled ];
+    "golang-github-sanity-io-litter-dev"            [ fillcolor=green, style=filled ];
+    "golang-github-sasha-s-go-deadlock-dev"         [ fillcolor=green, style=filled ];
+    "golang-github-sirupsen-logrus-dev"             [ fillcolor=green, style=filled ];
+    "golang-github-spf13-afero-dev"                 [ fillcolor=green, style=filled ];
+    "golang-github-spkg-bom-dev"                    [ fillcolor=green, style=filled ];
+    "golang-github-stretchr-objx-dev"               [ fillcolor=green, style=filled ];
+    "golang-github-stretchr-testify-dev"            [ fillcolor=green, style=filled ];
+    "golang-github-thoas-go-funk-dev"               [ fillcolor=green, style=filled ];
+    "golang-github-xo-terminfo-dev"                 [ fillcolor=green, style=filled ];
+    "golang-golang-x-exp-dev"                       [ fillcolor=green, style=filled ];
+    "golang-golang-x-sys-dev"                       [ fillcolor=green, style=filled ];
+    "golang-gopkg-check.v1-dev"                     [ fillcolor=green, style=filled ];
+    "golang-gopkg-yaml.v3-dev"                      [ fillcolor=green, style=filled ];
+
+    // Define Node - Attention Needed
+    "(same with golang-github-go-git-go-git-dev)"   [ fillcolor=yellow, style=filled ];
+    "github.com/jesseduffield/kill (embedding)"     [ fillcolor=yellow, style=filled ];
+
+    // Define Comment
+    comment                                         [ shape=none, label="<Node colours>\nWhite: Not Packaged\nGreen: Done packaged\nYellow: Attention Needed" ];
+      
     // Define Graph
-    lazygit;
-    lazygit -> "jibber_jabber";
-    lazygit -> collections;
-    lazygit -> rollrus;
-        rollrus -> roll;
-    lazygit -> pty;
-    lazygit -> "go-getter";
-        "go-getter" -> "go-safetemp";
-    lazygit -> gocui;
-    lazygit -> "termbox-go";
-    lazygit -> str;
-    lazygit -> bom;
-    lazygit -> "go-git.v4";
-        "go-git.v4" -> gcfg;
-        "go-git.v4" -> gods;
-        "go-git.v4" -> "ssh_config";
-        "go-git.v4" -> "go-billy.v4";
-        "go-git.v4" -> "go-context";
+    lazygit -> "github.com/OpenPeeDeeP/xdg" -> "golang-github-davecgh-go-spew-dev";
+               "github.com/OpenPeeDeeP/xdg" -> "golang-github-pmezard-go-difflib-dev";
+               "github.com/OpenPeeDeeP/xdg" -> "golang-github-stretchr-objx-dev";
+               "github.com/OpenPeeDeeP/xdg" -> "golang-github-stretchr-testify-dev";
+    lazygit -> "golang-github-attotto-clipboard-dev";
+    lazygit -> "github.com/aybabtme/humanlog";
+    lazygit -> "golang-github-cloudfoundry-jibber-jabber-dev";
+    lazygit -> "golang-github-com-creack-pty-dev";
+    lazygit -> "github.com/fsmiamoto/git-todo-parser"-> "golang-github-stretchr-testify-dev";
+    lazygit -> "golang-github-go-errors-errors-dev";
+    lazygit -> "github.com/gookit/color" -> "golang-github-xo-terminfo-dev";
+               "github.com/gookit/color" -> "golang-golang-x-sys-dev";
+               "github.com/gookit/color" -> "golang-github-davecgh-go-spew-dev";
+               "github.com/gookit/color" -> "golang-github-pmezard-go-difflib-dev";
+               "github.com/gookit/color" -> "golang-gopkg-yaml.v3-dev";
+    lazygit -> "golang-github-imdario-mergo-dev";
+    lazygit -> "golang-github-intergrii-flaggy-dev";
+    lazygit -> "github.com/jesseduffield/generics" -> "golang-golang-x-exp-dev";
+    lazygit -> "github.com/jesseduffield/go-git/v5" -> "(same with golang-github-go-git-go-git-dev)";
+    lazygit -> "golang-github-jesseduffield-gocui-dev";
+    lazygit -> "github.com/jesseduffield/kill (embedding)";
+    lazygit -> "github.com/jesseduffield/lazycore" -> "github.com/samber/lo" -> "golang-github-stretchr-testify-dev";
+                                                      "github.com/samber/lo" -> "golang-github-thoas-go-funk-dev";
+                                                      "github.com/samber/lo" -> "golang-golang-x-exp-dev";
+                                                      "github.com/samber/lo" -> "golang-github-davecgh-go-spew-dev";
+                                                      "github.com/samber/lo" -> "golang-github-kr-text-dev";
+                                                      "github.com/samber/lo" -> "github.com/niemeyer/pretty" -> "golang-github-kr-text-dev";
+                                                      "github.com/samber/lo" -> "golang-github-pmezard-go-difflib-dev";
+                                                      "github.com/samber/lo" -> "golang-gopkg-check.v1-dev";
+                                                      "github.com/samber/lo" -> "golang-gopkg-yaml.v3-dev";
+               "github.com/jesseduffield/lazycore" -> "golang-github-stretchr-testify-dev";
+               "github.com/jesseduffield/lazycore" -> "golang-github-davecgh-go-spew-dev";
+               "github.com/jesseduffield/lazycore" -> "golang-github-pmezard-go-difflib-dev";
+               "github.com/jesseduffield/lazycore" -> "golang-golang-x-exp-dev";
+               "github.com/jesseduffield/lazycore" -> "golang-gopkg-yaml.v3-dev";
+    lazygit -> "github.com/jesseduffield/yaml" -> "golang-gopkg-check.v1-dev";
+    lazygit -> "golang-github-kardianos-osext-dev";
+    lazygit -> "golang-github-kyokomi-emoji-dev";
+    lazygit -> "golang-github-lucasb-eyer-go-colorful-dev"
+    lazygit -> "golang-github-mattn-go-runewidth-dev";
+    lazygit -> "golang-github-mgutz-str-dev";
+    lazygit -> "golang-github-pmezard-go-difflib-dev";
+    lazygit -> "golang-github-sahilm-fuzzy-dev";
+    lazygit -> "github.com/samber/lo";
+    lazygit -> "golang-github-sanity-io-litter-dev";
+    lazygit -> "golang-github-sasha-s-go-deadlock-dev";
+    lazygit -> "golang-github-sirupsen-logrus-dev";
+    lazygit -> "golang-github-spf13-afero-dev";
+    lazygit -> "golang-github-spkg-bom-dev";
+    lazygit -> "github.com/stefanhaller/tcell.v2";
+    lazygit -> "golang-github-stretchr-testify-dev";
+    lazygit -> "golang-github-xo-terminfo-dev";
+    lazygit -> "golang-golang-x-exp-dev";
+    lazygit -> "gopkg.in/ozeidan/fuzzy-patricia.v3";
+    lazygit -> "golang-gopkg-yaml.v3-dev";
 }
