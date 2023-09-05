@@ -81,7 +81,6 @@ digraph lazygit {
                                                       "github.com/samber/lo" -> "golang-golang-x-exp-dev";
                                                       "github.com/samber/lo" -> "golang-github-davecgh-go-spew-dev";
                                                       "github.com/samber/lo" -> "golang-github-kr-text-dev";
-                                                      "github.com/samber/lo" -> "github.com/niemeyer/pretty" -> "golang-github-kr-text-dev";
                                                       "github.com/samber/lo" -> "golang-github-pmezard-go-difflib-dev";
                                                       "github.com/samber/lo" -> "golang-gopkg-check.v1-dev";
                                                       "github.com/samber/lo" -> "golang-gopkg-yaml.v3-dev";
